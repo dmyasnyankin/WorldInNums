@@ -66,5 +66,25 @@ d3.json("data/data.json").then(function(data) {
 			});
 	});
 
-	console.log(cleanedData);
+	// console.log(cleanedData);
+
+	// JOIN new data with old elements
+	var circles = g.selectAll('circle').data(cleanedData[0], function(d){
+		return d.country
+	})
+
+	// EXIT old elementsnot present in new data
+	// circles.exit().attr('class', 'exit').remove()
+
+	// ENTER and UPDATE
+	circles.enter()
+		.append('circle')
+			.attr('class', 'enter')
+			.attr('cy', function(d){
+				return y(d.life_exp)
+			})
+			.attr('cx', function(d){
+				return x(d.income)
+			})
+			.attr('r', 5)
 });
