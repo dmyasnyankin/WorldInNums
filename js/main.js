@@ -9,6 +9,8 @@ var margins = { left: 100, bottom: 100, top: 50, right: 30 };
 var width = 600 - margins.left - margins.right;
 var height = 500 - margins.top - margins.bottom;
 
+var year = 0;
+
 // Set up SVG
 var g = d3
 	.select("#chart-area")
@@ -65,26 +67,51 @@ d3.json("data/data.json").then(function(data) {
 				return country;
 			});
 	});
-
 	// console.log(cleanedData);
 
+	// Add in interval loop
+	// Add an update
+	d3.interval(function(){
+		year = (year < 214) ? year+1 : 0
+		update(cleanedData[year])
+	}, 100)
+	// update(cleanedData[0]);
+});
+
+function update(data) {
+	// Transition variable
+	var t = d3.transition().duration(50)
+
 	// JOIN new data with old elements
-	var circles = g.selectAll('circle').data(cleanedData[0], function(d){
-		return d.country
-	})
+	var circles = g.selectAll("circle").data(data, function(d) {
+		return d.country;
+	});
 
 	// EXIT old elementsnot present in new data
-	// circles.exit().attr('class', 'exit').remove()
+	circles.exit().remove()
 
 	// ENTER and UPDATE
-	circles.enter()
-		.append('circle')
-			.attr('class', 'enter')
-			.attr('cy', function(d){
-				return y(d.life_exp)
+	circles
+		.enter()
+		.append("circle")
+		.attr("class", "enter")
+		.attr("cy", function(d) {
+			return y(d.life_exp);
+		})
+		.attr("cx", function(d) {
+			return x(d.income);
+		})
+		.attr("r", 5)
+		// UPDATE
+		.merge(circles)
+			.transition(t)
+			.attr("class", "enter")
+			.attr("cy", function(d) {
+				return y(d.life_exp);
 			})
-			.attr('cx', function(d){
-				return x(d.income)
+			.attr("cx", function(d) {
+				return x(d.income);
 			})
-			.attr('r', 5)
-});
+			.attr("r", 5);
+	
+}
