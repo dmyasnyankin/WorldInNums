@@ -33,6 +33,22 @@ var x = d3
 	.domain([300, 150000])
 	.range([0, width]);
 
+// Radius Scale (population)
+var pop_area = d3.scaleLinear()
+	.domain([2000, 1500000000])
+	// .domain([2000, 1400000000])
+	.range([25*Math.PI, 1200*Math.PI])
+
+	var yellow = d3.interpolateYlGn(0), // "rgb(255, 255, 229)"
+	yellowGreen = d3.interpolateYlGn(0.5), // "rgb(120, 197, 120)"
+	green = d3.interpolateYlGn(1); // "rgb(0, 69, 41)"
+
+// Ordinal Scale for Country colors
+// var color = d3.scaleOrdinal(d3.schemeBlues[9])
+var color = d3.scaleOrdinal(d3.schemePaired)
+// var color = d3.scaleOrdinal(d3.schemeDark2)
+// var color = d3.scaleOrdinal(d3.schemeSet1)
+
 // Append X and Y Axes
 var xAxisGroup = g
 	.append("g")
@@ -95,13 +111,16 @@ function update(data) {
 		.enter()
 		.append("circle")
 		.attr("class", "enter")
-		.attr("cy", function(d) {
-			return y(d.life_exp);
+		.attr('fill', function(d){
+			return color(d.continent)
 		})
-		.attr("cx", function(d) {
-			return x(d.income);
-		})
-		.attr("r", 5)
+		// .attr("cy", function(d) {
+		// 	return y(d.life_exp);
+		// })
+		// .attr("cx", function(d) {
+		// 	return x(d.income);
+		// })
+		// .attr("r", 5)
 		// UPDATE
 		.merge(circles)
 			.transition(t)
@@ -112,6 +131,9 @@ function update(data) {
 			.attr("cx", function(d) {
 				return x(d.income);
 			})
-			.attr("r", 5);
+			.attr("r", function(d){
+				return Math.sqrt(pop_area(d.population) / Math.PI)
+				// return pop(d.population) / Math.PI
+			});
 	
 }
