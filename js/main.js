@@ -25,7 +25,12 @@ var tip = d3
 	.tip()
 	.attr("class", "d3-tip")
 	.html(function(d) {
-		return d;
+		var text = "<strong>Country:</strong> <span style='color: rgb(51, 160, 44)'>" + d.country + "</span><br>";
+		text += "<strong>Continent:</strong> <span style='color: rgb(51, 160, 44); text-transform:capitalize'>" + d.continent + "</span><br>";
+		text += "<strong>Life Expectancy:</strong> <span style='color: rgb(51, 160, 44)'>" + d3.format('.2f')(d.life_exp) + "</span><br>";
+		text += "<strong>Income:</strong> <span style='color: rgb(51, 160, 44)'>" + d3.format('$,.0f')(d.income) + "</span><br>";
+		text += "<strong>Population:</strong> <span style='color: rgb(51, 160, 44)'>" + d3.format(',.0f')(d.population) + "</span><br>";
+		return text;
 	});
 g.call(tip);
 
