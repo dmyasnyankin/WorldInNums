@@ -44,10 +44,35 @@ var pop_area = d3.scaleLinear()
 	green = d3.interpolateYlGn(1); // "rgb(0, 69, 41)"
 
 // Ordinal Scale for Country colors
-// var color = d3.scaleOrdinal(d3.schemeBlues[9])
 var color = d3.scaleOrdinal(d3.schemePaired)
+// var color = d3.scaleOrdinal(d3.schemeBlues[9])
 // var color = d3.scaleOrdinal(d3.schemeDark2)
 // var color = d3.scaleOrdinal(d3.schemeSet1)
+
+// Y LABEL
+var yLabel = g.append("text")
+	.attr("y", -60)
+	.attr("x", -(height / 2))
+	.attr("font-size", "20px")
+	.attr("text-anchor", "middle")
+	.attr("transform", "rotate(-90)")
+	.text("Life Expectancy (Years)");
+
+// X LABEL
+var xLabel = g.append("text")
+	.attr("y", height + 60)
+	.attr("x", width / 2)
+	.attr("font-size", "20px")
+	.attr("text-anchor", "middle")
+	.text("GDP Per Capita ($)");
+
+var yearLabel = g.append("text")
+	.attr("y", height -10)
+	.attr("x", width - 40)
+	.attr("font-size", "30px")
+	.attr("opacity", "0.3")
+	.attr("text-anchor", "middle")
+	.text("1800");
 
 // Append X and Y Axes
 var xAxisGroup = g
@@ -104,7 +129,7 @@ function update(data) {
 	});
 
 	// EXIT old elementsnot present in new data
-	circles.exit().remove()
+	circles.exit().attr('class', 'exit').remove()
 
 	// ENTER and UPDATE
 	circles
@@ -136,4 +161,6 @@ function update(data) {
 				// return pop(d.population) / Math.PI
 			});
 	
+	// Update year label
+	yearLabel.text(+(year+ 1800))
 }
