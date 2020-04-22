@@ -10,6 +10,8 @@ var width = 600 - margins.left - margins.right;
 var height = 500 - margins.top - margins.bottom;
 
 var year = 0;
+var interval;
+var cleanedData;
 
 // Set up SVG
 var g = d3
@@ -141,7 +143,7 @@ d3.json("data/data.json").then(function(data) {
 	// console.log(data);
 
 	// Clean Data
-	const cleanedData = data.map(function(year) {
+	cleanedData = data.map(function(year) {
 		return year["countries"]
 			.filter(function(country) {
 				var notNull = country.income && country.life_exp;
@@ -155,18 +157,60 @@ d3.json("data/data.json").then(function(data) {
 	});
 	// console.log(cleanedData);
 
-	// Add in interval loop
-	// Add an update
-	d3.interval(function() {
-		year = year < 214 ? year + 1 : 0;
-		update(cleanedData[year]);
-	}, 100);
-	// update(cleanedData[0]);
+	update(cleanedData[0]);
 });
+
+$('#play-button')
+	.on('click', function(){
+		var button = $(this);
+		if (button.text() == 'Play'){
+			button.text('Pause');
+			interval = setInterval(step, 100);
+		}
+		else {
+			button.text('Play');
+			clearInterval(interval)
+		}
+	})
+
+$('#reset-button')
+	.on('click', function(){
+		year = 0;
+		update(cleanedData[0])
+	})
+
+$('#continent-select')
+	.on('change', function(){
+		update(cleanedData[year])
+	})
+
+$('#date-slider').slider({
+	max:2014,
+	min:1800,
+	step:1,
+	slide: function(event, ui){
+		year = ui.value - 1800;
+		update(cleanedData[year]);
+	}
+})
+
+function step(){
+	year = year < 214 ? year + 1 : 0;
+	update(cleanedData[year]);
+}
 
 function update(data) {
 	// Transition variable
 	var t = d3.transition().duration(50);
+
+	var continent = $('#continent-select').val();
+
+	var data = data.filter(function(d){
+		if (continent == 'all') { return true; }
+		else {
+			return d.continent == continent;
+		}
+	})
 
 	// JOIN new data with old elements
 	var circles = g.selectAll("circle").data(data, function(d) {
@@ -213,4 +257,6 @@ function update(data) {
 
 	// Update year label
 	yearLabel.text(+(year + 1800));
+	$("#year")[0].innerHTML = +(year + 1800)
+	$('#date-slider').slider('value', +(year + 1800))
 }
