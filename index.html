@@ -11,24 +11,65 @@
 	</head>
 
 	<body>
-		<nav class="navbar navbar-default">
+		<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container">
-				<!-- <a class="navbar-brand" href="#"><img id="logo" src="img/logo.png"></a>       -->
+				<a class="navbar-brand" href="#"><img src="img/globe.png" alt=""></a>
+				<a class="navbar-brand" href="#">Navbar</a>
 			</div>
-		</nav>
+        </nav> -->
+		<nav
+			class="navbar navbar-light bg-light"
+			style="background-color: rgb(240, 240, 240);"
+		>
+			<div class="container">
+				<a class="navbar-brand" style="padding-top:15px; padding-left: 0px;" href="#">
+					<img
+						src="img/globe.png"
+						width="50"
+						height="50"
+						class="d-inline-block align-top"
+						alt=""
+					/>
+				</a>
+				<p
+					class="navbar-brand"
+					style="font-size: 30px; padding-top: 24px; padding-left: 30px; color: rgba(173, 173, 173, 0.904);"
+				>
+					The World in Numbers
+				</p>
+			</div>
+        </nav>
+        
+        <div class="jumbotron" style="text-align: center; margin-top: -20px; background-color: rgb(178, 223, 138);">
+                <h1 class="display-4">Thanks for stopping by!</h1>
+                <p class="lead">The figure below shows the world in numbers, in particular the average life expectancy </p>
+                <p> and GDP per capita of every country and how they have changed over the years!</p>
+                <!-- <hr class="my-4"> -->
+                <p>To hear a more detailed explanation of the visual please click the link below.</p>
+                <a class="btn btn-primary btn-lg" href="https://www.youtube.com/watch?v=jbkSRLYSojo" role="button">Learn more</a>
+              </div>
 
 		<!-- Bootstrap grid setup -->
 		<div class="container">
 			<div class="row">
 				<div id="chart-area"></div>
 			</div>
-		</div>
+        </div>
+        
+        <h3 style="margin-top: 50px; text-align: center;">What does this visualization mean?</h3>
+        <ul class="list-group" style="text-align: center;">
+                <li class="list-group-item" style="background-color: rgb(166, 206, 227);">The X-Axis (Horizontal Line) represents a Logarithmic Scale to account for increasing GDP per capita in countries.</li>
+                <li class="list-group-item" style="background-color: rgb(178, 223, 138);">The Y-Axis (Vertical Line) represents a Linear Scale to account for increasing Life Expectancy in countries.</li>
+                <li class="list-group-item" style="background-color: rgb(51, 160, 44);">Each circle corresponds to a different country, plotted relative to their life expectancy and GDP per capita for a given year.</li>
+                <li class="list-group-item" style="background-color: rgb(56, 108, 176);">The color of the circle corresponds to the continent (or general region) the country is in. Light Green = Europe, Dark Green = Asia, Light Blue = Africa, Dark Blue = The Americas</li>
+                <li class="list-group-item" style="background-color: rgb(166, 206, 227);">The size of the circle represents the population of a given country in a particular point in time.</li>
+              </ul>
 
 		<!-- External JS libraries -->
 		<script src="js/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/d3.min.js"></script>
 		<!-- Custom JS -->
-        <script src="js/main.js"></script>
+		<script src="js/main.js"></script>
 	</body>
 </html>
