@@ -90,7 +90,30 @@ var yAxisGroup = g.append("g").attr("class", "y axis");
 var yAxisCall = d3.axisLeft(y);
 yAxisGroup.call(yAxisCall);
 
-var yAxisGroup = g.append("g").attr("class", "y axis");
+// Add Legend
+var continents = ['europe', 'asia', 'americas', 'africa']
+
+var legend = g.append('g')
+	.attr('transform', 'translate(' + (width-10) + ',' + (height-125) + ')')
+
+continents.forEach(function(continent, i){
+	var legendRow = legend.append('g')
+		.attr('transform', 'translate(0, ' + (i*20) + ')')
+
+	// Add legend color
+	legendRow.append('rect')
+		.attr('width', 10)
+		.attr('height', 10)
+		.attr('fill', color(continent))
+	
+	// Add legend text
+	legendRow.append('text')
+		.attr('x', -10)
+		.attr('y', 10)
+		.attr('text-anchor', 'end')
+		.style('text-transform', 'capitalize')
+		.text(continent)
+})
 
 d3.json("data/data.json").then(function(data) {
 	// console.log(data);
