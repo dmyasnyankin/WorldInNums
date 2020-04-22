@@ -5,13 +5,16 @@
 		<meta name="description" content="" />
 		<title>World in Numbers</title>
 		<!-- Bootstrap -->
-        <link rel="stylesheet" href="css/bootstrap.min.css" />
-        <!-- D3 Tooltip Styling -->
-        <link rel="stylesheet" href="css/d3-tip.css">
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<!-- D3 Tooltip Styling -->
+		<link rel="stylesheet" href="css/d3-tip.css" />
 		<!-- Custom styling -->
-        <link rel="stylesheet" href="css/style.css" />
-        <!-- JQuery UI CSS -->
-        <link href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="css/style.css" />
+		<!-- JQuery UI CSS -->
+		<!-- jQuery UI CSS -->
+		<link rel="stylesheet" href="css/jquery-ui.min.css" />
+		<link rel="stylesheet" href="css/jquery-ui.structure.min.css" />
+		<link rel="stylesheet" href="css/jquery-ui.theme.min.css" />
 
 	</head>
 
@@ -27,7 +30,11 @@
 			style="background-color: rgb(240, 240, 240);"
 		>
 			<div class="container">
-				<a class="navbar-brand" style="padding-top:15px; padding-left: 0px;" href="#">
+				<a
+					class="navbar-brand"
+					style="padding-top:15px; padding-left: 0px;"
+					href="#"
+				>
 					<img
 						src="img/globe.png"
 						width="50"
@@ -43,57 +50,104 @@
 					The World in Numbers
 				</p>
 			</div>
-        </nav>
-        
-        <div class="jumbotron" style="text-align: center; margin-top: -20px; background-color: rgb(178, 223, 138);">
-                <h1 class="display-4">Thanks for stopping by!</h1>
-                <p class="lead">The figure below shows the world in numbers, in particular, the average life expectancy </p>
-                <p> and GDP per capita of every country and how they have changed over the years!</p>
-                <!-- <hr class="my-4"> -->
-                <p>To hear a more detailed explanation of the visual please click the link below.</p>
-                <a class="btn btn-primary btn-lg" href="https://www.youtube.com/watch?v=jbkSRLYSojo" role="button">Learn more</a>
-              </div>
+		</nav>
+
+		<div
+			class="jumbotron"
+			style="text-align: center; margin-top: -20px; background-color: rgb(178, 223, 138);"
+		>
+			<h1 class="display-4">Thanks for stopping by!</h1>
+			<p class="lead">
+				The figure below shows the world in numbers, in particular, the average
+				life expectancy
+			</p>
+			<p>
+				and GDP per capita of every country and how they have changed over the
+				years!
+			</p>
+			<!-- <hr class="my-4"> -->
+			<p>
+				To hear a more detailed explanation of the visual please click the link
+				below.
+			</p>
+			<a
+				class="btn btn-primary btn-lg"
+				href="https://www.youtube.com/watch?v=jbkSRLYSojo"
+				role="button"
+				>Learn more</a
+			>
+		</div>
 
 		<!-- Bootstrap grid setup -->
 		<div class="container">
-            <div class="row">
-                <div class="container col-md-9" style="margin-bottom: 50px;">
-                    <button id='play-button' class='btn btn-primary' style="margin-top: 10px;">Play</button>
-                    <button id='reset-button' class='btn btn-primary' style="margin-top: 10px;">Reset</button>
-                    <div id='slider-div' class="row" style="float: right; width: 300px; margin-right: 150px;">
-                        <label>Year: <span id="year">1800</span></label>
-                        <div id="date-slider"></div>
-                    </div>
-                </div>
-                <div class="col-md-3" style="margin-bottom: 50px; margin-top: 10px;">
-                    <select id="continent-select" class="form-control">
-                        <option selected value="all">All</option>
-                        <option value="europe">Europe</option>
-                        <option value="asia">Asia</option>
-                        <option value="americas">Americas</option>
-                        <option value="africa">Africa</option>
-                    </select>
-                </div>
-            </div>
+			<div class="row">
+				<div class="container col-md-9" style="margin-bottom: 50px;">
+					<button
+						id="play-button"
+						class="btn btn-primary"
+						style="margin-top: 10px;"
+					>
+						Play
+					</button>
+					<button
+						id="reset-button"
+						class="btn btn-primary"
+						style="margin-top: 10px;"
+					>
+						Reset
+					</button>
+					<div
+						id="slider-div"
+						class="row"
+						style="float: right; width: 300px; margin-right: 150px;"
+					>
+						<label>Year: <span id="year">1800</span></label>
+						<div id="date-slider"></div>
+					</div>
+				</div>
+				<div class="col-md-3" style="margin-bottom: 50px; margin-top: 10px;">
+					<select id="continent-select" class="form-control">
+						<option selected value="all">All</option>
+						<option value="europe">Europe</option>
+						<option value="asia">Asia</option>
+						<option value="americas">Americas</option>
+						<option value="africa">Africa</option>
+					</select>
+				</div>
+			</div>
 			<div class="row">
 				<div id="chart-area"></div>
 			</div>
-        </div>
-        
-        <h3 style="margin-top: 50px; text-align: center;">What does this visualization mean?</h3>
-        <ul class="list-group" style="text-align: center;">
-                <li class="list-group-item" style="background-color: rgb(166, 206, 227);">The X-Axis (Horizontal Line) represents a Logarithmic Scale to account for increasing GDP per capita in countries.</li>
-                <li class="list-group-item" style="background-color: rgb(178, 223, 138);">The Y-Axis (Vertical Line) represents a Linear Scale to account for increasing Life Expectancy in countries.</li>
-                <li class="list-group-item" style="background-color: rgb(51, 160, 44);">Each circle corresponds to a different country, plotted relative to their life expectancy and GDP per capita for a given year.</li>
-                <li class="list-group-item" style="background-color: rgb(166, 206, 227);">The size of the circle represents the population of a given country in a particular point in time.</li>
-              </ul>
+		</div>
+
+		<h3 style="margin-top: 50px; text-align: center;">
+			What does this visualization mean?
+		</h3>
+		<ul class="list-group" style="text-align: center;">
+			<li class="list-group-item" style="background-color: rgb(166, 206, 227);">
+				The X-Axis (Horizontal Line) represents a Logarithmic Scale to account
+				for increasing GDP per capita in countries.
+			</li>
+			<li class="list-group-item" style="background-color: rgb(178, 223, 138);">
+				The Y-Axis (Vertical Line) represents a Linear Scale to account for
+				increasing Life Expectancy in countries.
+			</li>
+			<li class="list-group-item" style="background-color: rgb(51, 160, 44);">
+				Each circle corresponds to a different country, plotted relative to
+				their life expectancy and GDP per capita for a given year.
+			</li>
+			<li class="list-group-item" style="background-color: rgb(166, 206, 227);">
+				The size of the circle represents the population of a given country in a
+				particular point in time.
+			</li>
+		</ul>
 
 		<!-- External JS libraries -->
 		<script src="js/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/jquery-ui.min.js"></script>
-        <script src="js/d3.min.js"></script>
-        <!-- D3 Tool Tip -->
+		<script src="js/d3.min.js"></script>
+		<!-- D3 Tool Tip -->
 		<script src="js/d3-tip.js"></script>
 		<!-- Custom JS -->
 		<script src="js/main.js"></script>
